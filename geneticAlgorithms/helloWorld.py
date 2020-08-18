@@ -49,8 +49,8 @@ def generate_parent(target: str, geneSet: str)->Chromosome:
 def mutate_genes(genes: List, geneSet: str)->List:
     """Mutate genes target choosing character from geneSet"""
 
-    mutatedGenes         = copy.deepcopy(genes)
-    #mutatedGenes         = genes # uncomment to make test fail 
+    mutatedGenes         = genes[:]
+    #mutatedGenes         = genes # uncomment to make test fail
     index                = random.randrange(0, len(mutatedGenes))
     newGene, alternate   = random.sample(geneSet, 2)
     mutatedGenes[index]  = alternate if newGene == mutatedGenes[index] else newGene
