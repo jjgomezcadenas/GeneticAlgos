@@ -1,10 +1,13 @@
 from pytest import fixture
 
-from . helloWorld import Chromosome
-from . helloWorld import string_to_list, list_to_string
-from . helloWorld import get_fitness
-from . helloWorld import mutate_genes
-from . helloWorld import generate_parent
+from . genetic import Chromosome
+from . genetic import string_to_list, list_to_string
+from . genetic import mutate_chromosome
+from . genetic import mutate_genes
+from . genetic import generate_parent
+from . genetic import compare_with_target
+
+from . helloWorld import matching_string_fitness as get_fitness
 
 @fixture(scope="session")
 def geneSet():
@@ -32,23 +35,23 @@ def test_get_fitness_target_one_mutation(target, geneSet):
 
 
 def test_generate_parent_yields_fitness_less_than_target_len(target, geneSet):
-    c = generate_parent(target, geneSet)
+    c = generate_parent(target, geneSet, get_fitness)
     assert c.fitness < len(target)
 
 
 def test_generate_parent_yields_correct_fitness(target, geneSet):
-    c = generate_parent(target, geneSet)
+    c = generate_parent(target, geneSet, get_fitness)
     f = get_fitness(c.genes, target)
 
     assert c.fitness == f
 
 
 def test_generate_parent_yields_correct_len(target, geneSet):
-    c = generate_parent(target, geneSet)
+    c = generate_parent(target, geneSet, get_fitness)
     assert len(c.genes) == len(target)
 
 
 def test_mutate_genes_gives_different_gene_sets(target, geneSet):
-    guess = generate_parent(target, geneSet)
+    guess = generate_parent(target, geneSet, get_fitness)
     mutatedGenes = mutate_genes(guess.genes, geneSet)
     assert mutatedGenes != guess.genes
