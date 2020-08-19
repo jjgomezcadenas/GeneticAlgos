@@ -9,7 +9,7 @@ from typing import List, Dict, Tuple, Sequence, Callable
 
 @dataclass
 class Chromosome:
-    genes   : List
+    genes   : Sequence
     fitness : float
 
     def __str__(self):
@@ -21,7 +21,8 @@ class Chromosome:
 
 
 def list_to_string(mlist : List)->str:
-    return ''.join(mlist)
+    l2 = [f"{x}" for x in mlist]
+    return ''.join(l2)
 
 
 def string_to_list(mstr : str)->List:
@@ -37,9 +38,16 @@ def generate_parent(target: Sequence,
 
     """
     # A set of genes, sampled from the geneSet
-    genes   = random.sample(geneSet, len(target))
+    #genes   = random.sample(geneSet, len(target))
+
+    genes = []
+
+    while len(genes) < len(target):
+        sampleSize = min(len(target) - len(genes), len(geneSet))
+        genes.extend(random.sample(geneSet, sampleSize))
+
     fitness = get_fitness(genes, target)
-    return Chromosome(genes, 0)
+    return Chromosome(genes, fitness)
 
 
 def mutate_genes(genes: List, geneSet: str)->List:
@@ -53,7 +61,7 @@ def mutate_genes(genes: List, geneSet: str)->List:
     return mutatedGenes
 
 
-def mutate_chromosome(target:      Sequence, 
+def mutate_chromosome(target:      Sequence,
                       geneSet:     Sequence,
                       parent:      Chromosome,
                       get_fitness: Callable

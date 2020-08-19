@@ -57,5 +57,11 @@ if __name__ == "__main__":
     geneSet = " 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!."
     target = "This is the World's famous password"
 
+    geneSet = "012"
+    target = 10*["1"]
+
+    geneSet = [0,1,2]
+    target = 10*[1]
+
     i, time, guess = guess_target(target, geneSet)
     print(f'guess ={guess}, time ={time}, i = {i}')
