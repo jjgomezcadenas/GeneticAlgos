@@ -5,11 +5,11 @@ import datetime
 from dataclasses import dataclass
 from typing import List, Dict, Tuple, Sequence
 
-from geneticAlgorithms.genetic import Chromosome
-from geneticAlgorithms.genetic import string_to_list, list_to_string
-from geneticAlgorithms.genetic import mutate_chromosome
-from geneticAlgorithms.genetic import generate_parent
-from geneticAlgorithms.genetic import compare_with_target
+from geneticAlgorithms.genetic_hw import Chromosome
+from geneticAlgorithms.genetic_hw import string_to_list, list_to_string
+from geneticAlgorithms.genetic_hw import mutate_chromosome
+from geneticAlgorithms.genetic_hw import generate_parent
+from geneticAlgorithms.genetic_hw import compare_with_target
 
 
 def matching_string_fitness(guess: Sequence, target: Sequence)->float:

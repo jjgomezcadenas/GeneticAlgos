@@ -1,11 +1,11 @@
 from pytest import fixture
 
-from . genetic import Chromosome
-from . genetic import string_to_list, list_to_string
-from . genetic import mutate_chromosome
-from . genetic import mutate_genes
-from . genetic import generate_parent
-from . genetic import compare_with_target
+from . genetic_hw import Chromosome
+from . genetic_hw import string_to_list, list_to_string
+from . genetic_hw import mutate_chromosome
+from . genetic_hw import mutate_genes
+from . genetic_hw import generate_parent
+from . genetic_hw import compare_with_target
 
 from . helloWorld import matching_string_fitness as get_fitness
 from . helloWorld import guess_target
