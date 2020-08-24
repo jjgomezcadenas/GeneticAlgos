@@ -48,3 +48,27 @@ def mutate_chromosome(geneSet:     List,
     mutatedGenes = mutate_genes(parent.genes, geneSet)
     fitness      = get_fitness(mutatedGenes)
     return Chromosome(mutatedGenes, fitness)
+
+
+def optimize(sizeBoard, geneSet,
+             get_fitness, compare_fitness, optimalFitness,
+             verbose=True, imax=10000):
+
+    random.seed()
+    startTime = datetime.datetime.now()
+    guess = generate_parent(sizeBoard, geneSet, get_fitness)
+
+    print(f'First guess = {guess}')
+
+    i = 0
+    while compare_fitness(guess.fitness, optimalFitness) == False and i < imax:
+        newGuess = mutate_chromosome(geneSet, guess, get_fitness)
+        #print(newGuess)
+        time = datetime.datetime.now() - startTime
+        if compare_fitness(newGuess.fitness, guess.fitness) == True:
+            if verbose:
+                print(f'new guess increased fitness: {newGuess}, i = {i}, time = {time}')
+            guess = Chromosome(newGuess.genes, newGuess.fitness)
+
+        i+=1
+    return i, time, guess

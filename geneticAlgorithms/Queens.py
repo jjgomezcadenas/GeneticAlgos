@@ -11,6 +11,7 @@ from typing import List, Dict, Tuple, Sequence
 from geneticAlgorithms.genetic import Chromosome
 from geneticAlgorithms.genetic import mutate_chromosome
 from geneticAlgorithms.genetic import generate_parent
+from geneticAlgorithms.genetic import optimize  
 
 
 @dataclass
@@ -98,54 +99,8 @@ def get_fitness(genes):
     return 4 * size - total
 
 
-def sort_numbers(totalNumbers, geneSet, verbose=True, imax=10000):
-    startTime = datetime.datetime.now()
-    random.seed()
-    startTime = datetime.datetime.now()
-    setToSort = generate_parent(totalNumbers, geneSet, get_fitness)
-    print(f'Set to Sort = {setToSort}')
-
-    optimalFitness = Fitness(totalNumbers, 0)
-
-    i = 0
-    while compare_fitness(setToSort.fitness, optimalFitness) == False and i < imax:
-        newGuess = mutate_chromosome(geneSet, setToSort, get_fitness)
-        time = datetime.datetime.now() - startTime
-        if compare_fitness(newGuess.fitness, setToSort.fitness) == True:
-            if verbose:
-                print(f'new guess increased fitness: {setToSort}, i = {i}, time={time}')
-            setToSort = Chromosome(newGuess.genes, newGuess.fitness)
-
-        i+=1
-    return i, time, setToSort
-
-
 def compare_fitness(f1, f2):
     return f1 >= f2
-
-
-def optimize(sizeBoard, geneSet,
-             get_fitness, compare_fitness, optimalFitness,
-             verbose=True, imax=10000):
-
-    random.seed()
-    startTime = datetime.datetime.now()
-    guess = generate_parent(sizeBoard, geneSet, get_fitness)
-
-    print(f'First guess = {guess}')
-
-    i = 0
-    while compare_fitness(guess.fitness, optimalFitness) == False and i < imax:
-        newGuess = mutate_chromosome(geneSet, guess, get_fitness)
-        #print(newGuess)
-        time = datetime.datetime.now() - startTime
-        if compare_fitness(newGuess.fitness, guess.fitness) == True:
-            if verbose:
-                print(f'new guess increased fitness: {newGuess}, i = {i}, time = {time}')
-            guess = Chromosome(newGuess.genes, newGuess.fitness)
-
-        i+=1
-    return i, time, guess
 
 
 
