@@ -17,7 +17,8 @@ def generate_parent(length:      int,
                     geneSet:     List,
                     get_fitness: Callable)->Chromosome:
 
-    """Generates an initial chromosome:
+    """
+    Generates an initial chromosome:
     -genes are sampled from the geneSet
     -fitness is passed in the argument
 

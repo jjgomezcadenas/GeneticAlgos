@@ -11,7 +11,7 @@ from typing import List, Dict, Tuple, Sequence
 from geneticAlgorithms.genetic import Chromosome
 from geneticAlgorithms.genetic import mutate_chromosome
 from geneticAlgorithms.genetic import generate_parent
-from geneticAlgorithms.genetic import optimize  
+from geneticAlgorithms.genetic import optimize
 
 
 @dataclass
